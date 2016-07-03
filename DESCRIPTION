@@ -7,6 +7,6 @@ Author: c(person("Nicolas", "Bevacqua", role = c("aut", "cph"),
        person("Zygmunt", "Zawadzki", role = c("aut", "cre"),
        comment = "R interface", email = "zygmunt at zstat.pl"))
 Maintainer: Zygmunt Zawadzki <zygmunt@zstat.pl>
-Description: Coming soon
+Description: This package provides a simple interface to dragula javascript library for shiny. It allows to drag and drop elements between containers registered in dragula object.
 License: MIT
 LazyData: TRUE
