@@ -5,22 +5,21 @@
 #' @import htmlwidgets
 #'
 #' @export
-dragula <- function(x = list(c(1:5), c(10:11)), width = NULL, height = NULL) {
+dragula <- function(x, width = NULL, height = NULL) {
+
+  if(!is.character(x))
+  {
+    stop("x must be a character vector!")
+  }
 
   names(x) = NULL
 
-  simple = FALSE
-  if(is.character(x))
-  {
-    simple = TRUE
-    width  = "0px"
-    height = "0px"
-  }
+  width  = "0px"
+  height = "0px"
 
   # forward options using x
   x = list(
-    x = x,
-    simple = simple
+    x = x
   )
 
   # create widget
@@ -50,7 +49,7 @@ dragula <- function(x = list(c(1:5), c(10:11)), width = NULL, height = NULL) {
 #' @name dragula-shiny
 #'
 #' @export
-dragulaOutput <- function(outputId, width = '100%', height = '400px'){
+dragulaOutput <- function(outputId, width = '0px', height = '0px'){
   htmlwidgets::shinyWidgetOutput(outputId, 'dragula', width, height, package = 'dragulaR')
 }
 

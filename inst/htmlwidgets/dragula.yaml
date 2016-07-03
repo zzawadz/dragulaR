@@ -8,4 +8,12 @@ dependencies:
     stylesheet:
       - dragulaR.css
       - dragula-3.7.1/dragula.min.css
+  - name: dragulaMultiTable
+    version: 3.7.1
+    src: htmlwidgets/lib
+    script:
+      - dragula-3.7.1/dragula.min.js
+    stylesheet:
+      - dragulaR.css
+      - dragula-3.7.1/dragula.min.css
 

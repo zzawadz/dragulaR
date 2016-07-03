@@ -3,10 +3,6 @@ library(dragulaR)
 
 ui <- fluidPage(
 
-        fluidRow(verbatimTextOutput("dragVals")),
-
-        fluidRow(dragulaOutput("drag")),
-
         fluidRow(id = "plots",
                  column(6, plotOutput("iris")),
                  column(6, plotOutput("mtcars")),
@@ -17,22 +13,6 @@ ui <- fluidPage(
 )
 
 server <- function(input, output) {
-
-  output$drag = renderDragula({
-      tmp = list(colnames(iris), colnames(mtcars))
-      dragula(tmp)
-    })
-
-  output$dragVals = renderPrint({
-    req(input$drag)
-    sets = lapply(input$drag, function(x) unlist(x))
-    print(sets)
-  })
-
-  observeEvent(input$drag, {
-    print(input$drag)
-    a = input$drag
-  })
 
   output$iris = renderPlot({plot(iris)})
   output$mtcars = renderPlot({plot(mtcars)})
