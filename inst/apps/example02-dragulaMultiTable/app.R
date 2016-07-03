@@ -3,8 +3,8 @@ library(dragulaR)
 
 ui <- fluidPage(
 
-        fluidRow(verbatimTextOutput("dragVals")),
-        fluidRow(dragulaMultiTableOutput("drag"))
+        fluidRow(dragulaMultiTableOutput("drag")),
+        fluidRow(verbatimTextOutput("dragVals"))
 
 )
 

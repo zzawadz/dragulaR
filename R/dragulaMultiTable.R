@@ -12,6 +12,9 @@ dragulaMultiTable <- function(x, width = NULL, height = NULL) {
     stop("x must be a list!")
   }
 
+  width  = "0px"
+  height = "0px"
+
   names(x) = NULL
 
   # forward options using x
@@ -46,7 +49,7 @@ dragulaMultiTable <- function(x, width = NULL, height = NULL) {
 #' @name dragulaMultiTable-shiny
 #'
 #' @export
-dragulaMultiTableOutput <- function(outputId, width = '100%', height = '400px'){
+dragulaMultiTableOutput <- function(outputId, width = '100%', height = '0px'){
   htmlwidgets::shinyWidgetOutput(outputId, 'dragulaMultiTable', width, height, package = 'dragulaR')
 }
 
