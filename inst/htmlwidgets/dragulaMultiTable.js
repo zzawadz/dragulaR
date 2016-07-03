@@ -50,6 +50,8 @@ HTMLWidgets.widget({
         bodyDiv.className = "dragura-body row";
 
 
+        var totalNumberOfElements = 0;
+
         for(var i = 0; i < tables.length; i++)
         {
           var outerDiv = document.createElement('div');
@@ -57,6 +59,7 @@ HTMLWidgets.widget({
           outerDiv.id = tmpId;
           outerDiv.className = "dragura-container col-sm-3";
 
+          totalNumberOfElements += tables[i].length;
 
           for(var j = 0 ; j < tables[i].length; j++)
           {
@@ -72,10 +75,13 @@ HTMLWidgets.widget({
 
 
         // Add empty container
-        var outerDiv = document.createElement('div');
-        var tmpId = "id-" + uqId + "-" + tables.length;
-        outerDiv.id = tmpId;
-        outerDiv.className = "dragura-container col-sm-3";
+        if(instance.drag.containers.length < totalNumberOfElements)
+        {
+          var outerDiv = document.createElement('div');
+          var tmpId = "id-" + uqId + "-" + tables.length;
+          outerDiv.id = tmpId;
+          outerDiv.className = "dragura-container col-sm-3";
+        }
 
         instance.drag.containers.push(outerDiv);
         bodyDiv.appendChild(outerDiv);
@@ -102,7 +108,8 @@ HTMLWidgets.widget({
           }
 
 
-          if(outer[outer.length - 1].children.length > 0)
+          if(outer[outer.length - 1].children.length > 0 &&
+             instance.drag.containers.length < totalNumberOfElements)
           {
             // Add empty container
               var outerDiv = document.createElement('div');
