@@ -5,7 +5,14 @@
 #' @import htmlwidgets
 #'
 #' @export
-dragulaMultiTable <- function(x = list(c(1:5), c(10:11)), width = NULL, height = NULL) {
+dragulaMultiTable <- function(x, width = NULL, height = NULL) {
+
+  if(!is.list(x))
+  {
+    stop("x must be a list!")
+  }
+
+  names(x) = NULL
 
   # forward options using x
   x = list(
