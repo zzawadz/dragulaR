@@ -5,7 +5,7 @@
 #' @importFrom htmlwidgets createWidget
 #'
 #' @export
-dragula <- function(x, width = NULL, height = NULL) {
+dragula <- function(x) {
 
   if(!is.character(x))
   {
