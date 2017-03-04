@@ -10,3 +10,4 @@ Maintainer: Zygmunt Zawadzki <zygmunt@zstat.pl>
 Description: This package provides a simple interface to dragula javascript library for shiny. It allows to drag and drop elements between containers registered in dragula object.
 License: MIT
 LazyData: TRUE
+Depends: htmlwidgets
