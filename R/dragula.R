@@ -2,7 +2,7 @@
 #'
 #' Dragula
 #'
-#' @import htmlwidgets
+#' @importFrom htmlwidgets createWidget
 #'
 #' @export
 dragula <- function(x, width = NULL, height = NULL) {
@@ -23,7 +23,7 @@ dragula <- function(x, width = NULL, height = NULL) {
   )
 
   # create widget
-  htmlwidgets::createWidget(
+  createWidget(
     name = 'dragula',
     x,
     width = width,
