@@ -44,15 +44,6 @@ dragula <- function(x) {
   )
 }
 
-
-
-#' Shiny bindings for dygraph
-#'
-#' Output and render functions for using dygraph within Shiny
-#' applications and interactive Rmd documents.
-#'
-
-
 #' Dragula widget.
 #'
 #' Create dragula widget.
@@ -68,7 +59,10 @@ dragula <- function(x) {
 #' @export
 #' @examples
 #'
-#' # ADD_EXAMPLES_HERE
+#' if(interactive()) {
+#'   path <- system.file("apps/example02-input", package = "dragulaR")
+#'   runApp(path, display.mode = "showcase")
+#' }
 #'
 dragulaOutput <- function(outputId) {
   shinyWidgetOutput(outputId, "dragula", width = "0px", height = "0px", package = "dragulaR")
