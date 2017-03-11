@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 media
 ^\.travis\.yml$
+^appveyor\.yml$
