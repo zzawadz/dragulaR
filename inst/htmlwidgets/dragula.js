@@ -61,9 +61,6 @@ HTMLWidgets.widget({
             result[container.getAttribute('id')] = res;
           }
 
-          console.log(result);
-          console.log(instance.id + '_state');
-          console.log(instance.id);
           Shiny.onInputChange(instance.id + '_state', result);
         };
 
