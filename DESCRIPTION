@@ -12,4 +12,5 @@ License: MIT + file LICENSE
 LazyData: TRUE
 Depends: htmlwidgets, shiny
 RoxygenNote: 6.0.1
-Suggests: covr
+Suggests: covr,
+    testthat
