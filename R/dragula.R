@@ -2,7 +2,7 @@
 #'
 #' Create dragula instace to allow moving around elements of the registered containers.
 #'
-#' @param x vector with ids of containers. Their's elemntes will become draggable.
+#' @param x vector of containers ids. Their's elements will become draggable.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #' @export
