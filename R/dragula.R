@@ -44,12 +44,38 @@ dragula <- function(x) {
   )
 }
 
+
+
+#' Shiny bindings for dygraph
+#'
+#' Output and render functions for using dygraph within Shiny
+#' applications and interactive Rmd documents.
+#'
+
+
+#' Dragula widget.
+#'
+#' Create dragula widget.
+#'
+#' @param outputId output variable to read from.
+#' @param expr An expression that generates a dragula object.
+#' @param env The environment in which to evaluate \code{expr}.
+#' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
+#'   is useful if you want to save an expression in a variable.
+#'
+#' @return RETURN_DESCRIPTION
+#' @rdname dragulaWidget
 #' @export
-dragulaOutput <- function(outputId, width = "100%", height = "400px") {
+#' @examples
+#'
+#' # ADD_EXAMPLES_HERE
+#'
+dragulaOutput <- function(outputId) {
   shinyWidgetOutput(outputId, "dragula", width = "0px", height = "0px", package = "dragulaR")
 }
 
 #' @export
+#' @rdname dragulaWidget
 renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, dragulaOutput, env, quoted = TRUE)
