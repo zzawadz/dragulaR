@@ -14,6 +14,7 @@ HTMLWidgets.widget({
         {
           // remove old instance of dragula
           instance.drag = null;
+          instance.id   = null;
         }
 
         while(el.firstChild)
@@ -28,6 +29,7 @@ HTMLWidgets.widget({
         // elments' ids, and they will be pushed into dragula.
 
         instance.drag = dragula();
+        instance.id   = el.id;
         var ids = x.x;
 
         // hack when ids is just single string
@@ -42,6 +44,31 @@ HTMLWidgets.widget({
           console.log(document.getElementById(ids[i]));
           instance.drag.containers.push(document.getElementById(ids[i]));
         }
+
+        var onDrop = function (el) {
+
+          var result = {};
+          console.log(instance.drag.containers);
+          for(var i = 0; i < instance.drag.containers.length; i++) {
+
+            var container = instance.drag.containers[i];
+            var res = [];
+            document
+              .querySelectorAll("#" + container.getAttribute('id') + ' [drag]')
+              .forEach(function(x, id) { res[id] = x.getAttribute("drag");});
+
+
+            result[container.getAttribute('id')] = res;
+          }
+
+          console.log(result);
+          console.log(instance.id + '_state');
+          console.log(instance.id);
+          Shiny.onInputChange(instance.id + '_state', result);
+        };
+
+        onDrop(el);
+        instance.drag.on('drop', onDrop);
 
       },
 

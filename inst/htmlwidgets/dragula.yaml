@@ -6,5 +6,4 @@ dependencies:
     script:
       - dragula-3.7.1/dragula.min.js
     stylesheet:
-      - dragulaR.css
       - dragula-3.7.1/dragula.min.css

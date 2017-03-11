@@ -2,7 +2,7 @@
 #'
 #' Dragula
 #'
-#' @importFrom htmlwidgets createWidget
+#' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #'
 #' @export
 dragula <- function(x) {
@@ -30,4 +30,15 @@ dragula <- function(x) {
     height = height,
     package = 'dragulaR'
   )
+}
+
+#' @export
+dragulaOutput <- function(outputId, width = "100%", height = "400px") {
+  shinyWidgetOutput(outputId, "dragula", width = "0px", height = "0px", package = "dragulaR")
+}
+
+#' @export
+renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
+  if (!quoted) { expr <- substitute(expr) } # force quoted
+  shinyRenderWidget(expr, dragulaOutput, env, quoted = TRUE)
 }
