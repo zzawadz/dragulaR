@@ -1,10 +1,19 @@
-#' Dragula
+#' Register containers to dragula.
 #'
-#' Dragula
+#' Create dragula instace to allow moving around elements of the registered containers.
+#'
+#' @param x vector with ids of containers. Their's elemntes will become draggable.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
-#'
 #' @export
+#' @return
+#' Return htmlWidget. Should be used only inside shiny ui.
+#'
+#' @examples
+#'
+#' path <- system.file("apps/example01-dragula", package = "dragulaR")
+#' runApp(path)
+#'
 dragula <- function(x) {
 
   if(!is.character(x))
