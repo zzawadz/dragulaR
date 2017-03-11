@@ -11,8 +11,10 @@
 #'
 #' @examples
 #'
-#' path <- system.file("apps/example01-dragula", package = "dragulaR")
-#' runApp(path)
+#' if(interactive()) {
+#'   path <- system.file("apps/example01-dragula", package = "dragulaR")
+#'   runApp(path, display.mode = "showcase")
+#' }
 #'
 dragula <- function(x) {
 

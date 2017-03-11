@@ -2,7 +2,7 @@ library(shiny)
 library(dragulaR)
 
 ui <- fluidPage(
-
+        titlePanel("Drag and drop elements with dragulaR"),
         fluidRow(id = "plots",
                  column(6, plotOutput("iris")),
                  column(6, plotOutput("mtcars")),
