@@ -7,5 +7,23 @@
 
 R's interface for ***[dragula](https://github.com/bevacqua/dragula)*** library for moving around elements in shiny app.
 
-## See example:
+## Installation:
+
+```r
+source("https://install-github.me/zzawadz/dragulaR")
+```
+
+## Demo:
+
+### Drag'n'drop plots:
+
+```r
+library(dragulaR)
+path <- system.file("apps/example01-dragula", package = "dragulaR")
+runApp(path, display.mode = "showcase")
+```
 ![](media/basic.gif)
+
+### Track what is in containers:
+
+![](media/model.gif)
