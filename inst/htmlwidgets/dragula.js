@@ -47,8 +47,8 @@ HTMLWidgets.widget({
 
         var onDrop = function (el) {
 
-          var result = {};
-          console.log(instance.drag.containers);
+          var result = {}
+
           for(var i = 0; i < instance.drag.containers.length; i++) {
 
             var container = instance.drag.containers[i];
