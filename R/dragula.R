@@ -5,6 +5,7 @@
 #' @param x vector of containers ids. Their's elements will become draggable.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
+#' @import shiny
 #' @export
 #' @return
 #' Return htmlWidget. Should be used only inside shiny ui.
