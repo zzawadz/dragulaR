@@ -1,15 +1,14 @@
 library(shiny)
-library(shiny.semantic)
 
 makeElement <- function(data, name)
 {
-  div(class = "ui styled accordion",
+  div(style = "border-width:2px;border-style:solid;",
     drag = name,
     div(class = "active title", name),
     div(class = "active content", p(sprintf("Class: %s", class(data[[name]])))))
 }
 
-ui <- semanticPage(
+ui <- fluidPage(
   titlePanel("Drag and drop elements with dragulaR"),
 
   fluidRow(style = "margin: 15px;",
