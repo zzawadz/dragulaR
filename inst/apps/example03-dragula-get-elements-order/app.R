@@ -2,7 +2,7 @@ library(shiny)
 library(dragulaR)
 
 ui <- fluidPage(
-        titlePanel("Drag and drop elements with dragulaR - get order of elements inside enclosing div"),
+        titlePanel("Get order of elements in div"),
         verbatimTextOutput("order"),
         fluidRow(id = "plots",
                  column(6, plotOutput("iris"), drag = "iris"),
