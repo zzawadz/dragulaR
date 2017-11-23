@@ -75,3 +75,13 @@ renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
   if (!quoted) { expr <- substitute(expr) } # force quoted
   shinyRenderWidget(expr, dragulaOutput, env, quoted = TRUE)
 }
+
+#' @export
+dragulaValue <- function(x) {
+  x <- lapply(x, unlist)
+  names(x) <- vapply(
+    names(x),
+    FUN.VALUE = "",
+    function(y) tail(strsplit(y, split = "-")[[1]],1))
+  x
+}

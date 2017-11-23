@@ -2,6 +2,7 @@
 
 export(dragula)
 export(dragulaOutput)
+export(dragulaValue)
 export(renderDragula)
 import(shiny)
 importFrom(htmlwidgets,createWidget)

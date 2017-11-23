@@ -3,7 +3,7 @@
 \name{dragulaOutput}
 \alias{dragulaOutput}
 \alias{renderDragula}
-\title{Shiny bindings for dygraph}
+\title{Dragula widget.}
 \usage{
 dragulaOutput(outputId)
 
@@ -23,16 +23,13 @@ is useful if you want to save an expression in a variable.}
 RETURN_DESCRIPTION
 }
 \description{
-Output and render functions for using dygraph within Shiny
-applications and interactive Rmd documents.
-}
-\details{
-Dragula widget.
-
 Create dragula widget.
 }
 \examples{
 
-# ADD_EXAMPLES_HERE
+if(interactive()) {
+  path <- system.file("apps/example02-input", package = "dragulaR")
+  runApp(path, display.mode = "showcase")
+}
 
 }

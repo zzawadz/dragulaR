@@ -4,7 +4,7 @@
 \alias{dragula}
 \title{Register containers to dragula.}
 \usage{
-dragula(x)
+dragula(x, id = NULL)
 }
 \arguments{
 \item{x}{vector of containers ids. Their's elements will become draggable.}
