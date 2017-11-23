@@ -27,3 +27,16 @@ runApp(path, display.mode = "showcase")
 ### Track what is in containers:
 
 ![](media/model.gif)
+
+### Other examples
+
+```r
+library(dragulaR)
+runApp(
+  system.file("apps/example03-dragula-get-elements-order", package = "dragulaR"),
+  display.mode = "showcase")
+runApp(
+  system.file("apps/example04-dragula-module", package = "dragulaR"),
+  display.mode = "showcase")
+  
+```
