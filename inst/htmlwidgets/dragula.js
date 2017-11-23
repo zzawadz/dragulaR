@@ -32,7 +32,6 @@ HTMLWidgets.widget({
 
 
         if (typeof x.elid !== 'undefined' && x.elid !== null) {
-          console.log(x.elid)
           instance.id = x.elid;
         } else {
           instance.id = el.id;
@@ -74,8 +73,11 @@ HTMLWidgets.widget({
           }
         };
 
-        onDrop(el);
-        instance.drag.on('drop', onDrop);
+
+        $(document).on('shiny:connected', function(event) {
+          onDrop(el);
+          instance.drag.on('drop', onDrop);
+        });
 
       },
 
