@@ -17,7 +17,7 @@
 #'   runApp(path, display.mode = "showcase")
 #' }
 #'
-dragula <- function(x) {
+dragula <- function(x, id = NULL) {
 
   if(!is.character(x))
   {
@@ -31,7 +31,8 @@ dragula <- function(x) {
 
   # forward options using x
   x = list(
-    x = x
+    x = x,
+    elid = id
   )
 
   # create widget

@@ -37,7 +37,7 @@ server <- function(input, output) {
   })
 
   output$plot <- renderPlot({
-    req(input$dragula_state)
+    req(input$dragula)
     state <- input$dragula_state
     validate(need(length(state$Model) > 1, message = "Please select at least two variables."))
 
@@ -45,7 +45,7 @@ server <- function(input, output) {
   })
 
   output$print <- renderText({
-    state <- input$dragula_state
+    state <- input$dragula
     sprintf("Available:\n  %s\n\nModel:\n  %s",
             paste(unlist(state$Available), collapse = ", "),
             paste(unlist(state$Model), collapse = ", "))

@@ -29,7 +29,15 @@ HTMLWidgets.widget({
         // elments' ids, and they will be pushed into dragula.
 
         instance.drag = dragula();
-        instance.id   = el.id;
+
+
+        if (typeof x.elid !== 'undefined' && x.elid !== null) {
+          console.log(x.elid)
+          instance.id = x.elid;
+        } else {
+          instance.id = el.id;
+        }
+
         var ids = x.x;
 
         // hack when ids is just single string
@@ -39,7 +47,6 @@ HTMLWidgets.widget({
         } else {
           for(var i = 0; i < ids.length; i++)
           {
-            console.log(document.getElementById(ids[i]));
             instance.drag.containers.push(document.getElementById(ids[i]));
           }
         }
@@ -62,7 +69,9 @@ HTMLWidgets.widget({
             result[container.getAttribute('id')] = res;
           }
 
-          Shiny.onInputChange(instance.id + '_state', result);
+          if (typeof Shiny.onInputChange !== 'undefined') {
+            Shiny.onInputChange(instance.id, result);
+          }
         };
 
         onDrop(el);

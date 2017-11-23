@@ -8,18 +8,16 @@ ui <- fluidPage(
                  column(6, plotOutput("mtcars"), drag = "mtcars"),
                  column(6, plotOutput("AirPassengers"), drag = "AirPassengers"),
                  column(6, plotOutput("Formaldehyde"), drag = "Formaldehyde")),
-        div(id = "tmp"),
-        dragulaOutput("dragula"),
+        dragula("plots", id = "dragula"),
         verbatimTextOutput("order")
 
 )
 
 server <- function(input, output) {
 
-  output$dragula <- renderDragula({ dragula("plots") })
 
   output$order <- renderPrint({
-    input$dragula_state
+    input$dragula
   })
 
   output$iris = renderPlot({plot(iris)})
