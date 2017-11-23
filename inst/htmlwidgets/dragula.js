@@ -36,14 +36,15 @@ HTMLWidgets.widget({
         if(!Array.isArray(ids))
         {
           instance.drag.containers.push(document.getElementById(ids));
-          return(null);
+        } else {
+          for(var i = 0; i < ids.length; i++)
+          {
+            console.log(document.getElementById(ids[i]));
+            instance.drag.containers.push(document.getElementById(ids[i]));
+          }
         }
 
-        for(var i = 0; i < ids.length; i++)
-        {
-          console.log(document.getElementById(ids[i]));
-          instance.drag.containers.push(document.getElementById(ids[i]));
-        }
+
 
         var onDrop = function (el) {
 
