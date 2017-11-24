@@ -85,3 +85,10 @@ dragulaValue <- function(x) {
     function(y) tail(strsplit(y, split = "-")[[1]],1))
   x
 }
+
+useDragulajs <- function() {
+  shinyjs::extendShinyjs("shinyjs.refreshDragulaR = function(params) {
+
+                        }")
+}
+

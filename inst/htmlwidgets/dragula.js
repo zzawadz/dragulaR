@@ -61,7 +61,7 @@ HTMLWidgets.widget({
             var container = instance.drag.containers[i];
             var res = [];
             document
-              .querySelectorAll("#" + container.getAttribute('id') + ' [drag]')
+              .querySelectorAll("#" + container.getAttribute('id') + ' > [drag]')
               .forEach(function(x, id) { res[id] = x.getAttribute("drag");});
 
 
@@ -75,6 +75,11 @@ HTMLWidgets.widget({
 
 
         $(document).on('shiny:connected', function(event) {
+
+          if(typeof dragulaR === 'undefined') {
+            dragulaR = new Map();
+          }
+          dragulaR.set(instance.id, onDrop);
           onDrop(el);
           instance.drag.on('drop', onDrop);
         });
