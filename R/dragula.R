@@ -3,6 +3,7 @@
 #' Create dragula instace to allow moving around elements of the registered containers.
 #'
 #' @param x vector of containers ids. Their's elements will become draggable.
+#' @param id input id to read from in shiny.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #' @import shiny
@@ -76,7 +77,23 @@ renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
   shinyRenderWidget(expr, dragulaOutput, env, quoted = TRUE)
 }
 
+
+#' Format dragula input object.
+#'
+#' @param x dragula input.
+#'
+#' @description
+#' This is a utility function for better formatting dragula's input.
+#'
 #' @export
+#' @importFrom utils tail
+#' @examples
+#'
+#' \dontrun{
+#' # Example call:
+#' dragulaValue(input$dragula)
+#' }
+#'
 dragulaValue <- function(x) {
   x <- lapply(x, unlist)
   names(x) <- vapply(
@@ -90,14 +107,16 @@ dragulaValue <- function(x) {
 #' Register dragulaR's js functions for refreshing dragula object.
 #'
 #' @export
-#'
+#' @importFrom shinyjs extendShinyjs
 #' @examples
 #'
+#' \dontrun{
 #' # See example for more details
 #' library(dragulaR)
 #' runApp(
 #'   system.file("apps/example05-dragula-dynamic-elements", package = "dragulaR"),
 #'   display.mode = "showcase")
+#' }
 #'
 useDragulajs <- function() {
   shinyjs::extendShinyjs(text = "shinyjs.refreshDragulaR = function(params) {

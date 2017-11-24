@@ -11,10 +11,12 @@ Register dragulaR's js functions for refreshing dragula object.
 }
 \examples{
 
+\dontrun{
 # See example for more details
 library(dragulaR)
 runApp(
   system.file("apps/example05-dragula-dynamic-elements", package = "dragulaR"),
   display.mode = "showcase")
+}
 
 }
