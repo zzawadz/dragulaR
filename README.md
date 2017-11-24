@@ -38,5 +38,8 @@ runApp(
 runApp(
   system.file("apps/example04-dragula-module", package = "dragulaR"),
   display.mode = "showcase")
+runApp(
+  system.file("apps/example04-dragula-dynamic-elements", package = "dragulaR"),
+  display.mode = "showcase")
   
 ```

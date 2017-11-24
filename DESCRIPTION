@@ -11,6 +11,6 @@ Description: This package provides a simple interface to dragula javascript libr
 License: MIT + file LICENSE
 LazyData: TRUE
 Depends: htmlwidgets, shiny
-RoxygenNote: 6.0.1
+RoxygenNote: 6.0.1.9000
 Suggests: covr,
     testthat

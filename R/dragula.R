@@ -86,6 +86,19 @@ dragulaValue <- function(x) {
   x
 }
 
+
+#' Register dragulaR's js functions for refreshing dragula object.
+#'
+#' @export
+#'
+#' @examples
+#'
+#' # See example for more details
+#' library(dragulaR)
+#' runApp(
+#'   system.file("apps/example05-dragula-dynamic-elements", package = "dragulaR"),
+#'   display.mode = "showcase")
+#'
 useDragulajs <- function() {
   shinyjs::extendShinyjs(text = "shinyjs.refreshDragulaR = function(params) {
     dragulaR.get(params[0])()
