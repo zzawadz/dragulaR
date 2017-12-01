@@ -73,16 +73,25 @@ HTMLWidgets.widget({
           }
         };
 
+         if (typeof Shiny === 'undefined') {
+           $(document).on('shiny:connected', function(event) {
+              if(typeof dragulaR === 'undefined') {
+                dragulaR = new Map();
+              }
+              dragulaR.set(instance.id, onDrop);
+              onDrop(el);
+              instance.drag.on('drop', onDrop);
+            });
+         } else {
+           if(typeof dragulaR === 'undefined') {
+                dragulaR = new Map();
+           }
+           dragulaR.set(instance.id, onDrop);
+           onDrop(el);
+           instance.drag.on('drop', onDrop);
+         }
 
-        $(document).on('shiny:connected', function(event) {
 
-          if(typeof dragulaR === 'undefined') {
-            dragulaR = new Map();
-          }
-          dragulaR.set(instance.id, onDrop);
-          onDrop(el);
-          instance.drag.on('drop', onDrop);
-        });
 
       },
 
