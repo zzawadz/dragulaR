@@ -28,6 +28,16 @@ runApp(path, display.mode = "showcase")
 
 ![](media/model.gif)
 
+### Works with `renderUI`
+
+![](media/renderui.gif)
+
+```r
+runApp(
+  system.file("apps/example06-dragula-dynamic-elements-renderUI", package = "dragulaR"),
+  display.mode = "showcase")
+```
+
 ### Other examples
 
 ```r
