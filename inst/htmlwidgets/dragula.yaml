@@ -1,9 +1,9 @@
 # (uncomment to add a dependency)
 dependencies:
   - name: dragula
-    version: 3.7.1
+    version: 3.7.2
     src: htmlwidgets/lib
     script:
-      - dragula-3.7.1/dragula.min.js
+      - dragula-3.7.2/dragula.min.js
     stylesheet:
-      - dragula-3.7.1/dragula.min.css
+      - dragula-3.7.2/dragula.min.css
