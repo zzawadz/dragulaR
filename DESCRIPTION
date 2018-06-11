@@ -2,7 +2,7 @@ Package: dragulaR
 Type: Package
 Title: Simple Interface to Dragula Javascript Library for Shiny
 Version: 0.1.0
-Author: c(person("Nicolas", "Bevacqua", role = c("aut", "cph"),
+Authors@R: c(person("Nicolas", "Bevacqua", role = c("aut", "cph"),
        comment = "dragula library in htmlwidgets/lib, https://github.com/bevacqua/dragula"),
        person("Zygmunt", "Zawadzki", role = c("aut", "cre"),
        comment = "R interface", email = "zygmunt at zstat.pl"))
