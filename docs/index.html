@@ -29,7 +29,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">dragulaR</a>
-        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.1.0</span>
+        <span class="label label-default" data-toggle="tooltip" data-placement="bottom" title="Released package">0.2.0</span>
       </span>
     </div>
 
@@ -74,38 +74,37 @@
 <h3 class="hasAnchor">
 <a href="#dragndrop-plots" class="anchor"></a>Drag’n’drop plots:</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dragulaR)
-path &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">"apps/example01-dragula"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>)
-<span class="kw">runApp</span>(path, <span class="dt">display.mode =</span> <span class="st">"showcase"</span>)</code></pre></div>
+<span class="kw">runApp</span>(<span class="kw">system.file</span>(<span class="st">"apps/example01-dragula"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>))</code></pre></div>
 <p><img src="media/basic.gif"></p>
 </div>
 <div id="track-what-is-in-containers" class="section level3">
 <h3 class="hasAnchor">
 <a href="#track-what-is-in-containers" class="anchor"></a>Track what is in containers:</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runApp</span>(<span class="kw">system.file</span>(<span class="st">"apps/example02-input"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>))</code></pre></div>
 <p><img src="media/model.gif"></p>
 </div>
 <div id="works-with-renderui" class="section level3">
 <h3 class="hasAnchor">
 <a href="#works-with-renderui" class="anchor"></a>Works with <code>renderUI</code>
 </h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runApp</span>(<span class="kw">system.file</span>(<span class="st">"apps/example06-dragula-dynamic-elements-renderUI"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>))</code></pre></div>
 <p><img src="media/renderui.gif"></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runApp</span>(
   <span class="kw">system.file</span>(<span class="st">"apps/example06-dragula-dynamic-elements-renderUI"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>),
   <span class="dt">display.mode =</span> <span class="st">"showcase"</span>)</code></pre></div>
 </div>
-<div id="other-examples" class="section level3">
+<div id="all-examples" class="section level3">
 <h3 class="hasAnchor">
-<a href="#other-examples" class="anchor"></a>Other examples</h3>
+<a href="#all-examples" class="anchor"></a>All examples</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(dragulaR)
-<span class="kw">runApp</span>(
-  <span class="kw">system.file</span>(<span class="st">"apps/example03-dragula-get-elements-order"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>),
-  <span class="dt">display.mode =</span> <span class="st">"showcase"</span>)
-<span class="kw">runApp</span>(
-  <span class="kw">system.file</span>(<span class="st">"apps/example04-dragula-module"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>),
-  <span class="dt">display.mode =</span> <span class="st">"showcase"</span>)
-<span class="kw">runApp</span>(
-  <span class="kw">system.file</span>(<span class="st">"apps/example04-dragula-dynamic-elements"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>),
-  <span class="dt">display.mode =</span> <span class="st">"showcase"</span>)
-  </code></pre></div>
+<span class="kw">dir</span>(<span class="kw">system.file</span>(<span class="st">"apps/"</span>, <span class="dt">package =</span> <span class="st">"dragulaR"</span>))
+<span class="co"># dashboard-example</span>
+<span class="co"># example01-dragula</span>
+<span class="co"># example02-input</span>
+<span class="co"># example03-dragula-get-elements-order</span>
+<span class="co"># example04-dragula-module</span>
+<span class="co"># example05-dragula-dynamic-elements</span>
+<span class="co"># example06-dragula-dynamic-elements-renderUI</span></code></pre></div>
 </div>
 </div>
 </div>
