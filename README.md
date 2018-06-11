@@ -42,6 +42,7 @@ runApp(
 
 ```r
 library(dragulaR)
+runApp(system.file("apps/dashboard-example", package = "dragulaR"))
 runApp(
   system.file("apps/example03-dragula-get-elements-order", package = "dragulaR"),
   display.mode = "showcase")

@@ -7,13 +7,13 @@ ui <- dashboardPage(
   dashboardBody(
     box(width = 12, verbatimTextOutput("text")),
     box(width = 6, id = "drag1", title = "Drag1",
-      box(width = 12, drag = "iris", plotOutput("iris")),
-      box(width = 12, drag = "mtcars", plotOutput("mtcars")),
-      box(width = 12, drag = "AirPassengers", plotOutput("AirPassengers")),
-      box(width = 12, drag = "Formaldehyde", plotOutput("Formaldehyde"))
+      div(drag = "iris", box(width = 12,  plotOutput("iris"))),
+      div(drag = "mtcars", box(width = 12, plotOutput("mtcars"))),
+      div(drag = "AirPassengers", box(width = 12, plotOutput("AirPassengers"))),
+      div(drag = "Formaldehyde", box(width = 12, plotOutput("Formaldehyde")))
     ),
     box(width = 6, id = "drag2", title = "Drag2",
-        box(width = 12, drag = "USArrests", plotOutput("USArrests"))),
+        div(drag = "USArrests", box(width = 12, plotOutput("USArrests")))),
 
     dragulaOutput("Dragula")
   )
@@ -26,7 +26,7 @@ server <- function(input, output) {
   })
 
   output$text <- renderPrint({
-    input$Dragula_state
+    dragulaValue(input$Dragula)
   })
 
   output$iris = renderPlot({plot(iris)})
