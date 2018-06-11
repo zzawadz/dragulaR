@@ -19,16 +19,23 @@ source("https://install-github.me/zzawadz/dragulaR")
 
 ```r
 library(dragulaR)
-path <- system.file("apps/example01-dragula", package = "dragulaR")
-runApp(path, display.mode = "showcase")
+runApp(system.file("apps/example01-dragula", package = "dragulaR"))
 ```
 ![](media/basic.gif)
 
 ### Track what is in containers:
 
+```r
+runApp(system.file("apps/example02-input", package = "dragulaR"))
+```
+
 ![](media/model.gif)
 
 ### Works with `renderUI`
+
+```r
+runApp(system.file("apps/example06-dragula-dynamic-elements-renderUI", package = "dragulaR"))
+```
 
 ![](media/renderui.gif)
 
@@ -38,19 +45,16 @@ runApp(
   display.mode = "showcase")
 ```
 
-### Other examples
+### All examples
 
 ```r
 library(dragulaR)
-runApp(system.file("apps/dashboard-example", package = "dragulaR"))
-runApp(
-  system.file("apps/example03-dragula-get-elements-order", package = "dragulaR"),
-  display.mode = "showcase")
-runApp(
-  system.file("apps/example04-dragula-module", package = "dragulaR"),
-  display.mode = "showcase")
-runApp(
-  system.file("apps/example04-dragula-dynamic-elements", package = "dragulaR"),
-  display.mode = "showcase")
-  
+dir(system.file("apps/", package = "dragulaR"))
+# dashboard-example
+# example01-dragula
+# example02-input
+# example03-dragula-get-elements-order
+# example04-dragula-module
+# example05-dragula-dynamic-elements
+# example06-dragula-dynamic-elements-renderUI
 ```
