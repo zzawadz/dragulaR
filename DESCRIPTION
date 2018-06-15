@@ -1,13 +1,13 @@
 Package: dragulaR
 Type: Package
-Title: Drag and drop elements in 'Shiny' using 'Dragula Javascript Library'
-Version: 0.3.0
+Title: Drag and Drop Elements in 'Shiny' using 'Dragula Javascript Library'
+Version: 0.3.1
 Authors@R: c(person("Nicolas", "Bevacqua", role = c("aut", "cph"),
        comment = "dragula library in htmlwidgets/lib, https://github.com/bevacqua/dragula"),
        person("Zygmunt", "Zawadzki", role = c("aut", "cre"),
        comment = "R interface", email = "zygmunt@zstat.pl"))
 Maintainer: Zygmunt Zawadzki <zygmunt@zstat.pl>
-Description: Move elements between containers in 'Shiny' without explicity using JavaScript. The package can be used build a new custom inputs based on moving elements between containers or to change the positions of user interface elements.
+Description: Move elements between containers in 'Shiny' without explicitly using 'JavaScript'. It can be used to build custom inputs or to change the positions of user interface elements like plots or tables.
 License: GPL-2
 LazyData: TRUE
 Depends: htmlwidgets, shiny
