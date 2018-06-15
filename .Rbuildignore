@@ -5,3 +5,4 @@ media
 ^appveyor\.yml$
 ^codecov\.yml$
 docs
+README.md
