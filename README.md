@@ -25,7 +25,7 @@ runApp(system.file("apps/example01-dragula", package = "dragulaR"))
 ```
 ![](media/basic.gif)
 
-### Track what is in containers:
+### Track what is in the containers:
 
 ```r
 runApp(system.file("apps/example02-input", package = "dragulaR"))
