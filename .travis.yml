@@ -4,6 +4,11 @@ language: R
 sudo: true
 cache: packages
 
+addons:
+ apt:
+  packages:
+    - libv8-dev
+
 r:
   - oldrel
   - release
