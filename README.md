@@ -47,6 +47,16 @@ runApp(
   display.mode = "showcase")
 ```
 
+### Pass options to `dragula`
+
+See [dragula README][https://github.com/bevacqua/dragula#dragulacontainers-options] for valid options. 
+
+```r
+runApp(
+  system.file("apps/example07-dragula-input-options", package = "dragulaR"),
+  display.mode = "showcase")
+```
+
 ### All examples
 
 ```r
@@ -59,4 +69,5 @@ dir(system.file("apps/", package = "dragulaR"))
 # example04-dragula-module
 # example05-dragula-dynamic-elements
 # example06-dragula-dynamic-elements-renderUI
+# example07-dragula-input-options
 ```

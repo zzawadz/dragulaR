@@ -10,7 +10,7 @@ ui <- fluidPage(
         actionButton("Add", label = "Add"),
         fluidRow(id = "elements",
                  div(id = "placeholder")),
-        dragula("elements", id = "dragula")
+        dragula("elements", id = "dragula", removeOnSpill = TRUE)
 )
 
 server <- function(input, output) {

@@ -18,21 +18,38 @@
 #'   runApp(path, display.mode = "showcase")
 #' }
 #'
-dragula <- function(x, id = NULL) {
+dragula <- function(x, ...) {
 
+  message('This is your custom dragulaR instance speaking...')
   if(!is.character(x))
   {
     stop("x must be a character vector!")
   }
+
+  settings = list(...)
+  id <- settings[['id']]
+  settings[['id']] <- NULL
 
   names(x) = NULL
 
   width  = "0px"
   height = "0px"
 
+  if ('copyOnly' %in% names(settings)) {
+    container <- settings[['copyOnly']]
+    settings[['copy']] <- JS("function(el, source) { ",
+                             paste0("return source === document.getElementById('", container, "');"),
+                             "}")
+    settings[['accepts']] <- JS("function(el, target) {",
+                                paste0("return target !== document.getElementById('", container, "');"),
+                                "}")
+    settings[['copyOnly']] <- NULL
+  }
+
   # forward options using x
   x = list(
     x = x,
+    settings = settings,
     elid = id
   )
 
