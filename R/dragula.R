@@ -4,6 +4,7 @@
 #'
 #' @param x vector of containers ids. Their's elements will become draggable.
 #' @param id input id to read from in shiny.
+#' @param ... additonal arguments passed to dragula JS as options.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #' @import shiny
