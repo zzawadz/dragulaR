@@ -1,10 +1,15 @@
 HTMLWidgets.widget({
 
-  name: 'dragula',
+  name: "dragula",
 
-  type: 'output',
+  type: "output",
 
     factory: function(el, width, height) {
+
+        var instance = {
+            drag: dragula(),
+            id: el.id
+        };
 
         var shinyInputChange = function (el) {
             var result = {};
@@ -12,12 +17,12 @@ HTMLWidgets.widget({
                 var container = instance.drag.containers[i];
                 var res = [];
                 document
-          .querySelectorAll("#" + container.getAttribute('id') + ' > [drag]')
+          .querySelectorAll("#" + container.getAttribute("id") + " > [drag]")
           .forEach(function(x, id) { res[id] = x.getAttribute("drag");});
                 result[container.getAttribute('id')] = res;
             }
 
-            if (typeof Shiny.onInputChange !== 'undefined') {
+            if (typeof Shiny.onInputChange !== "undefined") {
                 Shiny.onInputChange(instance.id, result);
             }
         };
@@ -29,11 +34,6 @@ HTMLWidgets.widget({
             el.removeChild(el.firstChild);
         }
 
-        var instance = {
-            drag: dragula(),
-            id: el.id
-        };
-
         return {
             renderValue: function(x) {
                 if (x.settings !== null) {
@@ -42,8 +42,8 @@ HTMLWidgets.widget({
                         instance.drag = null;
                     }
                     instance.drag = dragula(x.settings)
-                                             .on('drop', shinyInputChange)
-                                             .on('remove', shinyInputChange);
+                                             .on("drop", shinyInputChange)
+                                             .on("remove", shinyInputChange);
                 }
 
                 if (typeof x.elid !== "undefined" && x.elid !== null) {
@@ -65,16 +65,16 @@ HTMLWidgets.widget({
                     }
                 }
 
-                if (typeof Shiny === 'undefined') {
-                    $(document).on('shiny:connected', function(event) {
-                        if(typeof dragulaR === 'undefined') {
+                if (typeof Shiny === "undefined") {
+                    $(document).on("shiny:connected", function(event) {
+                        if(typeof dragulaR === "undefined") {
                             dragulaR = new Map();
                         }
                         dragulaR.set(instance.id, shinyInputChange);
                         shinyInputChange(el);
                     });
                 } else {
-                    if(typeof dragulaR === 'undefined') {
+                    if(typeof dragulaR === "undefined") {
                         dragulaR = new Map();
                     }
                     dragulaR.set(instance.id, shinyInputChange);
