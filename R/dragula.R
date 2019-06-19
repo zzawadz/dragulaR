@@ -21,7 +21,6 @@
 #'
 dragula <- function(x, ...) {
 
-  message('This is your custom dragulaR instance speaking...')
   if(!is.character(x))
   {
     stop("x must be a character vector!")
@@ -36,6 +35,7 @@ dragula <- function(x, ...) {
   width  = "0px"
   height = "0px"
 
+  # shortcut option for allowing copying from a single container
   if ('copyOnly' %in% names(settings)) {
     container <- settings[['copyOnly']]
     settings[['copy']] <- JS("function(el, source) { ",
