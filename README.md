@@ -49,7 +49,7 @@ runApp(
 
 ### Pass options to `dragula`
 
-See [dragula README][https://github.com/bevacqua/dragula#dragulacontainers-options] for valid options. 
+See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-options) for valid options. 
 
 ```r
 runApp(
