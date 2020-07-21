@@ -12,7 +12,7 @@ License: GPL-2
 LazyData: TRUE
 Depends: htmlwidgets, shiny
 Imports: shinyjs, V8
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1
 Suggests: covr,
     testthat
 BugReports: https://github.com/zzawadz/dragulaR/issues

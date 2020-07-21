@@ -4,10 +4,12 @@
 \alias{dragula}
 \title{Register containers to dragula.}
 \usage{
-dragula(x, id = NULL)
+dragula(x, ...)
 }
 \arguments{
 \item{x}{vector of containers ids. Their's elements will become draggable.}
+
+\item{...}{additonal arguments passed to dragula JS as options.}
 
 \item{id}{input id to read from in shiny.}
 }
