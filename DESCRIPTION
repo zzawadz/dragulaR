@@ -5,7 +5,9 @@ Version: 0.3.2
 Authors@R: c(person("Nicolas", "Bevacqua", role = c("aut", "cph"),
        comment = "dragula library in htmlwidgets/lib, https://github.com/bevacqua/dragula"),
        person("Zygmunt", "Zawadzki", role = c("aut", "cre"),
-       comment = "R interface", email = "zygmunt@zstat.pl"))
+       comment = "R interface", email = "zygmunt@zstat.pl"),
+       person("Darren", "Maczka", role = c("ctb"), email = "dmaczka@utk.edu")
+       )
 Maintainer: Zygmunt Zawadzki <zygmunt@zstat.pl>
 Description: Move elements between containers in 'Shiny' without explicitly using 'JavaScript'. It can be used to build custom inputs or to change the positions of user interface elements like plots or tables.
 License: GPL-2
