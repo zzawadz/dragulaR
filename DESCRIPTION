@@ -1,7 +1,7 @@
 Package: dragulaR
 Type: Package
 Title: Drag and Drop Elements in 'Shiny' using 'Dragula Javascript Library'
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: c(person("Nicolas", "Bevacqua", role = c("aut", "cph"),
        comment = "dragula library in htmlwidgets/lib, https://github.com/bevacqua/dragula"),
        person("Zygmunt", "Zawadzki", role = c("aut", "cre"),

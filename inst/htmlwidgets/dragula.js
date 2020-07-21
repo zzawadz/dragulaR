@@ -1,101 +1,92 @@
 HTMLWidgets.widget({
 
-  name: 'dragula',
+  name: "dragula",
 
-  type: 'output',
+  type: "output",
 
-      initialize: function(el, width, height) {
-        return {};
-      },
+    factory: function(el, width, height) {
 
-      renderValue: function(el, x, instance) {
-
-        if(instance.drag !== null)
-        {
-          // remove old instance of dragula
-          instance.drag = null;
-          instance.id   = null;
-        }
-
-        while(el.firstChild)
-        {
-          // remove old divs inside this object
-          el.removeChild(el.firstChild);
-        }
-
-
-        // this code is used when x.x was created from string vector
-        // in that case - values from that vector will be treated as a
-        // elments' ids, and they will be pushed into dragula.
-
-        instance.drag = dragula();
-
-
-        if (typeof x.elid !== 'undefined' && x.elid !== null) {
-          instance.id = x.elid;
-        } else {
-          instance.id = el.id;
-        }
-
-        var ids = x.x;
-
-        // hack when ids is just single string
-        if(!Array.isArray(ids))
-        {
-          instance.drag.containers.push(document.getElementById(ids));
-        } else {
-          for(var i = 0; i < ids.length; i++)
-          {
-            instance.drag.containers.push(document.getElementById(ids[i]));
-          }
-        }
-
-
-
-        var onDrop = function (el) {
-
-          var result = {}
-
-          for(var i = 0; i < instance.drag.containers.length; i++) {
-
-            var container = instance.drag.containers[i];
-            var res = [];
-            document
-              .querySelectorAll("#" + container.getAttribute('id') + ' > [drag]')
-              .forEach(function(x, id) { res[id] = x.getAttribute("drag");});
-
-
-            result[container.getAttribute('id')] = res;
-          }
-
-          if (typeof Shiny.onInputChange !== 'undefined') {
-            Shiny.onInputChange(instance.id, result);
-          }
+        var instance = {
+            drag: dragula(),
+            id: el.id
         };
 
-         if (typeof Shiny === 'undefined') {
-           $(document).on('shiny:connected', function(event) {
-              if(typeof dragulaR === 'undefined') {
-                dragulaR = new Map();
-              }
-              dragulaR.set(instance.id, onDrop);
-              onDrop(el);
-              instance.drag.on('drop', onDrop);
-            });
-         } else {
-           if(typeof dragulaR === 'undefined') {
-                dragulaR = new Map();
-           }
-           dragulaR.set(instance.id, onDrop);
-           onDrop(el);
-           instance.drag.on('drop', onDrop);
-         }
+        var shinyInputChange = function (el) {
+            var result = {};
+            for(var i = 0; i < instance.drag.containers.length; i++) {
+                var container = instance.drag.containers[i];
+                var res = [];
+                document
+          .querySelectorAll("#" + container.getAttribute("id") + " > [drag]")
+          .forEach(function(x, id) { res[id] = x.getAttribute("drag");});
+                result[container.getAttribute('id')] = res;
+            }
 
+            if (typeof Shiny.onInputChange !== "undefined") {
+                Shiny.onInputChange(instance.id, result);
+            }
+        };
 
+        // Is this necessary? Does dragula even use this element for anything?
+        while(el.firstChild)
+        {
+            // remove old divs inside this object
+            el.removeChild(el.firstChild);
+        }
 
-      },
+        return {
+            renderValue: function(x) {
+                if (x.settings !== null) {
+                    if (instance.drag !== null) {
+                        instance.drag.destroy();
+                        instance.drag = null;
+                    }
+                    instance.drag = dragula(x.settings)
+                                             .on("drop", shinyInputChange)
+                                             .on("remove", shinyInputChange);
+                }
 
-      resize: function(width, height) {
-      }
+                if (typeof x.elid !== "undefined" && x.elid !== null) {
+                    instance.id = x.elid;
+                } else {
+                    instance.id = el.id;
+                }
 
+                var ids = x.x;
+
+                // hack when ids is just single string
+                if(!Array.isArray(ids))
+                {
+                    instance.drag.containers.push(document.getElementById(ids));
+                } else {
+                    for(var i = 0; i < ids.length; i++)
+                    {
+                        instance.drag.containers.push(document.getElementById(ids[i]));
+                    }
+                }
+
+                if (typeof Shiny === "undefined") {
+                    $(document).on("shiny:connected", function(event) {
+                        if(typeof dragulaR === "undefined") {
+                            dragulaR = new Map();
+                        }
+                        dragulaR.set(instance.id, shinyInputChange);
+                        shinyInputChange(el);
+                    });
+                } else {
+                    if(typeof dragulaR === "undefined") {
+                        dragulaR = new Map();
+                    }
+                    dragulaR.set(instance.id, shinyInputChange);
+                    shinyInputChange(el);
+                }
+
+            },
+
+            resize: function(width, height) {
+            },
+
+            drag: instance.drag
+        };
+    }
 });

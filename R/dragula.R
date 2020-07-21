@@ -4,6 +4,7 @@
 #'
 #' @param x vector of containers ids. Their's elements will become draggable.
 #' @param id input id to read from in shiny.
+#' @param ... additonal arguments passed to dragula JS as options.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #' @import shiny
@@ -18,21 +19,38 @@
 #'   runApp(path, display.mode = "showcase")
 #' }
 #'
-dragula <- function(x, id = NULL) {
+dragula <- function(x, ...) {
 
   if(!is.character(x))
   {
     stop("x must be a character vector!")
   }
 
+  settings = list(...)
+  id <- settings[['id']]
+  settings[['id']] <- NULL
+
   names(x) = NULL
 
   width  = "0px"
   height = "0px"
 
+  # shortcut option for allowing copying from a single container
+  if ('copyOnly' %in% names(settings)) {
+    container <- settings[['copyOnly']]
+    settings[['copy']] <- JS("function(el, source) { ",
+                             paste0("return source === document.getElementById('", container, "');"),
+                             "}")
+    settings[['accepts']] <- JS("function(el, target) {",
+                                paste0("return target !== document.getElementById('", container, "');"),
+                                "}")
+    settings[['copyOnly']] <- NULL
+  }
+
   # forward options using x
   x = list(
     x = x,
+    settings = settings,
     elid = id
   )
 
