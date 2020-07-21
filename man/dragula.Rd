@@ -9,9 +9,7 @@ dragula(x, ...)
 \arguments{
 \item{x}{vector of containers ids. Their's elements will become draggable.}
 
-\item{...}{additonal arguments passed to dragula JS as options.}
-
-\item{id}{input id to read from in shiny.}
+\item{...}{additonal arguments passed to dragula JS as options. E.g. \code{id} will be an id to read from in shiny.}
 }
 \value{
 Return htmlWidget. Should be used only inside shiny ui.

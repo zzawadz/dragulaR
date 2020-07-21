@@ -3,11 +3,11 @@
 #' Create dragula instace to allow moving around elements of the registered containers.
 #'
 #' @param x vector of containers ids. Their's elements will become draggable.
-#' @param id input id to read from in shiny.
-#' @param ... additonal arguments passed to dragula JS as options.
+#' @param ... additonal arguments passed to dragula JS as options. E.g. \code{id} will be an id to read from in shiny.
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #' @import shiny
+#' @importFrom V8 JS
 #' @export
 #' @return
 #' Return htmlWidget. Should be used only inside shiny ui.
