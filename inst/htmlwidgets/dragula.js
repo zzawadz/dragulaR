@@ -55,6 +55,11 @@ HTMLWidgets.widget({
                     if (instance.maxItems !== null) {
                         var originalAccepts = x.settings.accepts;
                         x.settings.accepts = function(el, target, source, sibling) {
+                            // Guard against null target (happens when dragging over non-container areas)
+                            if (target === null) {
+                                return false;
+                            }
+
                             var targetId = target.getAttribute('id');
 
                             // Check maxItems constraint
