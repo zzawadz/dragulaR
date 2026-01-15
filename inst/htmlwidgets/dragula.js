@@ -1,3 +1,8 @@
+// Global map to store dragulaR instances for refresh callbacks
+if (typeof dragulaR === "undefined") {
+    var dragulaR = new Map();
+}
+
 HTMLWidgets.widget({
 
   name: "dragula",
@@ -8,7 +13,8 @@ HTMLWidgets.widget({
 
         var instance = {
             drag: dragula(),
-            id: el.id
+            id: el.id,
+            maxItems: null
         };
 
         var shinyInputChange = function (el) {
@@ -36,11 +42,41 @@ HTMLWidgets.widget({
 
         return {
             renderValue: function(x) {
+                // Store maxItems configuration
+                instance.maxItems = x.maxItems || null;
+
                 if (x.settings !== null) {
                     if (instance.drag !== null) {
                         instance.drag.destroy();
                         instance.drag = null;
                     }
+
+                    // If maxItems is specified, wrap the accepts function
+                    if (instance.maxItems !== null) {
+                        var originalAccepts = x.settings.accepts;
+                        x.settings.accepts = function(el, target, source, sibling) {
+                            var targetId = target.getAttribute('id');
+
+                            // Check maxItems constraint
+                            if (instance.maxItems && instance.maxItems.hasOwnProperty(targetId)) {
+                                var maxCount = instance.maxItems[targetId];
+                                var currentCount = target.querySelectorAll('[drag]').length;
+
+                                // If source is not the same as target, we're adding an item
+                                if (source !== target && currentCount >= maxCount) {
+                                    return false;
+                                }
+                            }
+
+                            // Call original accepts function if it exists
+                            if (typeof originalAccepts === 'function') {
+                                return originalAccepts(el, target, source, sibling);
+                            }
+
+                            return true;
+                        };
+                    }
+
                     instance.drag = dragula(x.settings)
                                              .on("drop", shinyInputChange)
                                              .on("remove", shinyInputChange);
@@ -57,26 +93,30 @@ HTMLWidgets.widget({
                 // hack when ids is just single string
                 if(!Array.isArray(ids))
                 {
-                    instance.drag.containers.push(document.getElementById(ids));
+                    var container = document.getElementById(ids);
+                    if (container !== null) {
+                        instance.drag.containers.push(container);
+                    } else {
+                        console.warn("dragulaR: Container with id '" + ids + "' not found in DOM");
+                    }
                 } else {
                     for(var i = 0; i < ids.length; i++)
                     {
-                        instance.drag.containers.push(document.getElementById(ids[i]));
+                        var container = document.getElementById(ids[i]);
+                        if (container !== null) {
+                            instance.drag.containers.push(container);
+                        } else {
+                            console.warn("dragulaR: Container with id '" + ids[i] + "' not found in DOM");
+                        }
                     }
                 }
 
                 if (typeof Shiny === "undefined") {
                     $(document).on("shiny:connected", function(event) {
-                        if(typeof dragulaR === "undefined") {
-                            dragulaR = new Map();
-                        }
                         dragulaR.set(instance.id, shinyInputChange);
                         shinyInputChange(el);
                     });
                 } else {
-                    if(typeof dragulaR === "undefined") {
-                        dragulaR = new Map();
-                    }
                     dragulaR.set(instance.id, shinyInputChange);
                     shinyInputChange(el);
                 }

@@ -49,12 +49,24 @@ runApp(
 
 ### Pass options to `dragula`
 
-See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-options) for valid options. 
+See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-options) for valid options.
 
 ```r
 runApp(
   system.file("apps/example07-dragula-input-options", package = "dragulaR"),
   display.mode = "showcase")
+```
+
+### Limit maximum items in a container
+
+Use the `maxItems` option to restrict the number of items that can be dropped into a container:
+
+```r
+# Limit "Model" container to 3 items maximum
+dragula(c("Available", "Model"), maxItems = list(Model = 3))
+
+# Run the example app
+runApp(system.file("apps/example08-max-items", package = "dragulaR"))
 ```
 
 ### All examples
@@ -70,4 +82,5 @@ dir(system.file("apps/", package = "dragulaR"))
 # example05-dragula-dynamic-elements
 # example06-dragula-dynamic-elements-renderUI
 # example07-dragula-input-options
+# example08-max-items
 ```

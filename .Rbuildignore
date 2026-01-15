@@ -6,3 +6,4 @@ media
 ^codecov\.yml$
 docs
 README.md
+AGENTS.md
