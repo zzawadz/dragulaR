@@ -4,6 +4,11 @@
 #'
 #' @param x vector of containers ids. Their's elements will become draggable.
 #' @param ... additonal arguments passed to dragula JS as options. E.g. \code{id} will be an id to read from in shiny.
+#' Additional shortcut options:
+#' \itemize{
+#'   \item \code{copyOnly}: container id from which elements can only be copied (not moved)
+#'   \item \code{maxItems}: named list specifying maximum items per container, e.g. \code{maxItems = list(Model = 3)}
+#' }
 #'
 #' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
 #' @import shiny
@@ -15,8 +20,18 @@
 #' @examples
 #'
 #' if(interactive()) {
+#'   # Basic example
 #'   path <- system.file("apps/example01-dragula", package = "dragulaR")
 #'   runApp(path, display.mode = "showcase")
+#'
+#'   # Example with maxItems (limits Model container to 3 items)
+#'   path <- system.file("apps/example08-max-items", package = "dragulaR")
+#'   runApp(path, display.mode = "showcase")
+#' }
+#'
+#' # Create dragula with maxItems limit
+#' \dontrun{
+#' dragula(c("Available", "Model"), maxItems = list(Model = 3))
 #' }
 #'
 dragula <- function(x, ...) {
@@ -47,11 +62,22 @@ dragula <- function(x, ...) {
     settings[['copyOnly']] <- NULL
   }
 
+  # shortcut option for limiting maximum items in containers
+  maxItems <- NULL
+  if ('maxItems' %in% names(settings)) {
+    maxItems <- settings[['maxItems']]
+    if (!is.list(maxItems) || is.null(names(maxItems))) {
+      stop("maxItems must be a named list, e.g. maxItems = list(Model = 3)")
+    }
+    settings[['maxItems']] <- NULL
+  }
+
   # forward options using x
   x = list(
     x = x,
     settings = settings,
-    elid = id
+    elid = id,
+    maxItems = maxItems
   )
 
   # create widget
@@ -74,7 +100,8 @@ dragula <- function(x, ...) {
 #' @param quoted Is \code{expr} a quoted expression (with \code{quote()})? This
 #'   is useful if you want to save an expression in a variable.
 #'
-#' @return RETURN_DESCRIPTION
+#' @return \code{dragulaOutput} returns a Shiny tag list for the UI.
+#' \code{renderDragula} returns a Shiny render function for the server.
 #' @rdname dragulaWidget
 #' @export
 #' @examples
@@ -102,6 +129,11 @@ renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
 #'
 #' @description
 #' This is a utility function for better formatting dragula's input.
+#' It extracts the container names and their element order from the raw
+#' input object.
+#'
+#' @return A named list where names are container IDs and values are
+#' character vectors of element identifiers (from the \code{drag} attribute).
 #'
 #' @export
 #' @importFrom utils tail
@@ -113,7 +145,10 @@ renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' }
 #'
 dragulaValue <- function(x) {
-  x <- lapply(x, unlist)
+  x <- lapply(x, function(item) {
+    result <- unlist(item)
+    if (is.null(result)) character(0) else result
+  })
   names(x) <- vapply(
     names(x),
     FUN.VALUE = "",
@@ -123,6 +158,12 @@ dragulaValue <- function(x) {
 
 
 #' Register dragulaR's js functions for refreshing dragula object.
+#'
+#' This function enables the \code{js$refreshDragulaR()} JavaScript function
+#' in Shiny, which should be called after dynamically adding elements to
+#' a dragula container.
+#'
+#' @return A Shiny tag list that registers the JavaScript extension.
 #'
 #' @export
 #' @importFrom shinyjs extendShinyjs
@@ -137,8 +178,11 @@ dragulaValue <- function(x) {
 #' }
 #'
 useDragulajs <- function() {
-  shinyjs::extendShinyjs(text = "shinyjs.refreshDragulaR = function(params) {
-    dragulaR.get(params[0])()
-}")
+  shinyjs::extendShinyjs(
+    text = "shinyjs.refreshDragulaR = function(params) {
+      dragulaR.get(params[0])()
+    }",
+    functions = c("refreshDragulaR")
+  )
 }
 

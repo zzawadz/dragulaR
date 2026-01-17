@@ -1,7 +1,5 @@
 # Drag'n'drop elements with *dragulaR*
 
-[![Travis-CI Build Status](https://travis-ci.org/zzawadz/dragulaR.svg?branch=master)](https://travis-ci.org/zzawadz/dragulaR)
-[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/zzawadz/dragulaR?branch=master&svg=true)](https://ci.appveyor.com/project/zzawadz/dragulaR)
 [![Coverage Status](https://img.shields.io/codecov/c/github/zzawadz/dragulaR/master.svg)](https://codecov.io/github/zzawadz/dragulaR?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/dragulaR)](https://cran.r-project.org/package=dragulaR)
 [![Downloads](https://cranlogs.r-pkg.org/badges/dragulaR)](https://cran.rstudio.com/package=dragulaR)
@@ -49,12 +47,24 @@ runApp(
 
 ### Pass options to `dragula`
 
-See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-options) for valid options. 
+See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-options) for valid options.
 
 ```r
 runApp(
   system.file("apps/example07-dragula-input-options", package = "dragulaR"),
   display.mode = "showcase")
+```
+
+### Limit maximum items in a container
+
+Use the `maxItems` option to restrict the number of items that can be dropped into a container:
+
+```r
+# Limit "Model" container to 3 items maximum
+dragula(c("Available", "Model"), maxItems = list(Model = 3))
+
+# Run the example app
+runApp(system.file("apps/example08-max-items", package = "dragulaR"))
 ```
 
 ### All examples
@@ -70,4 +80,5 @@ dir(system.file("apps/", package = "dragulaR"))
 # example05-dragula-dynamic-elements
 # example06-dragula-dynamic-elements-renderUI
 # example07-dragula-input-options
+# example08-max-items
 ```
