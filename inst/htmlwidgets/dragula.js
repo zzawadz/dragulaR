@@ -51,6 +51,11 @@ HTMLWidgets.widget({
                         instance.drag = null;
                     }
 
+                    // Empty R list serializes as [] not {}; convert to object for dragula
+                    if (Array.isArray(x.settings)) {
+                        x.settings = {};
+                    }
+
                     // If maxItems is specified, wrap the accepts function
                     if (instance.maxItems !== null) {
                         var originalAccepts = x.settings.accepts;
