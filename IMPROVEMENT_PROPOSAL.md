@@ -8,11 +8,11 @@ This document analyzes the dragulaR package (v0.3.3) and proposes improvements a
 
 ## 1. Code Quality & Bug Fixes
 
-### 1.1 Potential Issues in `dragulaValue()` Function
+### 1.1 Design Note: `dragulaValue()` Namespace Handling
 
 **Location:** `R/dragula.R:147-157`
 
-**Issue:** The function uses `tail(strsplit(...), 1)` to extract container names, which can produce incorrect results when container IDs contain hyphens.
+**Current behavior:** The function uses `tail(strsplit(...), 1)` to extract container names, returning only the last segment after splitting by `-`.
 
 ```r
 # Current implementation
@@ -22,29 +22,14 @@ names(x) <- vapply(
   function(y) tail(strsplit(y, split = "-")[[1]], 1))
 ```
 
-**Problem scenario:**
-```r
-# If container is named "my-container" with namespace "ns"
-# Input name: "ns-my-container"
-# Expected: "my-container"
-# Actual: "container" (only last segment after split)
-```
+**This is correct by design.** Shiny modules use `-` as the namespace separator, so `ns-child-container` represents:
+- `ns` - parent module namespace
+- `child` - child module namespace
+- `container` - the actual element ID
 
-**Proposed fix:**
-```r
-# Remove only the namespace prefix (everything before first hyphen)
-names(x) <- vapply(
-  names(x),
-  FUN.VALUE = "",
-  function(y) {
-    parts <- strsplit(y, split = "-", fixed = TRUE)[[1]]
-    if (length(parts) > 1) {
-      paste(parts[-1], collapse = "-")
-    } else {
-      y
-    }
-  })
-```
+Using `-` in element IDs is discouraged in Shiny for this reason. The current behavior correctly extracts just the element ID without namespace prefixes.
+
+**Documentation recommendation:** Add a note in `dragulaValue()` documentation explaining this behavior and warning users not to use hyphens in container IDs.
 
 ### 1.2 Missing Input Validation
 
@@ -239,12 +224,13 @@ dragula(c("a", "b"),
 
 **Missing test scenarios:**
 
-1. **dragulaValue with hyphenated container names**
+1. **dragulaValue with nested module namespaces**
    ```r
-   test_that("dragulaValue handles hyphenated container names", {
-     input <- list(`ns-my-container` = list("a", "b"))
+   test_that("dragulaValue correctly extracts element ID from nested namespaces", {
+     # Simulates ns-child-container from nested Shiny modules
+     input <- list(`ns-child-container` = list("a", "b"))
      result <- dragulaValue(input)
-     expect_equal(names(result), "my-container")  # Currently fails
+     expect_equal(names(result), "container")  # Correctly returns just the element ID
    })
    ```
 
@@ -496,10 +482,10 @@ useDragulajs <- function() {
 ## 9. Implementation Priority
 
 ### High Priority (Should Fix)
-1. Fix `dragulaValue()` hyphenated name handling
-2. Add input validation for container IDs
-3. Update README installation instructions
-4. Add missing test coverage
+1. Add input validation for container IDs
+2. Update README installation instructions
+3. Add missing test coverage
+4. Document `dragulaValue()` namespace behavior
 
 ### Medium Priority (Nice to Have)
 1. Event callbacks for drag/dragend/cancel
@@ -520,10 +506,10 @@ useDragulajs <- function() {
 
 If planning a major version bump (0.4.0 or 1.0.0):
 
-1. **Fix `dragulaValue()` behavior** - May change return values for hyphenated container names
-2. **Require explicit namespace handling** in module contexts
-3. **Remove deprecated patterns** if any exist
-4. **Standardize option names** to match dragula.js conventions more closely
+1. **Add strict input validation** - May reject previously accepted invalid container IDs
+2. **Remove deprecated patterns** if any exist
+3. **Standardize option names** to match dragula.js conventions more closely
+4. **Remove V8 dependency** - If confirmed unused, removal simplifies installation
 
 ---
 
