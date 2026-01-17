@@ -145,7 +145,10 @@ renderDragula <- function(expr, env = parent.frame(), quoted = FALSE) {
 #' }
 #'
 dragulaValue <- function(x) {
-  x <- lapply(x, unlist)
+  x <- lapply(x, function(item) {
+    result <- unlist(item)
+    if (is.null(result)) character(0) else result
+  })
   names(x) <- vapply(
     names(x),
     FUN.VALUE = "",
@@ -175,8 +178,11 @@ dragulaValue <- function(x) {
 #' }
 #'
 useDragulajs <- function() {
-  shinyjs::extendShinyjs(text = "shinyjs.refreshDragulaR = function(params) {
-    dragulaR.get(params[0])()
-}")
+  shinyjs::extendShinyjs(
+    text = "shinyjs.refreshDragulaR = function(params) {
+      dragulaR.get(params[0])()
+    }",
+    functions = c("refreshDragulaR")
+  )
 }
 
