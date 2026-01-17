@@ -9,8 +9,14 @@ dragulaValue(x)
 \arguments{
 \item{x}{dragula input.}
 }
+\value{
+A named list where names are container IDs and values are
+character vectors of element identifiers (from the \code{drag} attribute).
+}
 \description{
 This is a utility function for better formatting dragula's input.
+It extracts the container names and their element order from the raw
+input object.
 }
 \examples{
 

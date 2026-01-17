@@ -20,7 +20,8 @@ renderDragula(expr, env = parent.frame(), quoted = FALSE)
 is useful if you want to save an expression in a variable.}
 }
 \value{
-RETURN_DESCRIPTION
+\code{dragulaOutput} returns a Shiny tag list for the UI.
+\code{renderDragula} returns a Shiny render function for the server.
 }
 \description{
 Create dragula widget.

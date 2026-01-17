@@ -6,8 +6,13 @@
 \usage{
 useDragulajs()
 }
+\value{
+A Shiny tag list that registers the JavaScript extension.
+}
 \description{
-Register dragulaR's js functions for refreshing dragula object.
+This function enables the \code{js$refreshDragulaR()} JavaScript function
+in Shiny, which should be called after dynamically adding elements to
+a dragula container.
 }
 \examples{
 
