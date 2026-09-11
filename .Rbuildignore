@@ -10,3 +10,4 @@ AGENTS.md
 ^tools$
 ^_shinylive$
 ^\.github$
+^_pkgdown\.yml$
