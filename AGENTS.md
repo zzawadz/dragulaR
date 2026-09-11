@@ -78,7 +78,7 @@ dragulaR/
 The dragula JS library supports various options (see [dragula docs](https://github.com/bevacqua/dragula#dragulacontainers-options)). To add support for a new option:
 
 1. Options are passed via `...` in `dragula()` function
-2. For complex options requiring JS functions, use `V8::JS()` wrapper
+2. For complex options requiring JS functions, use the `htmlwidgets::JS()` wrapper
 3. For convenience shortcuts (like `copyOnly`), add special handling in `dragula()`
 
 ### Updating the Bundled Dragula Library

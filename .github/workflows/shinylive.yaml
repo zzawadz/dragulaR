@@ -1,0 +1,71 @@
+name: Shinylive examples
+
+# Builds the example apps in inst/apps/ into a static Shinylive site and
+# publishes it to GitHub Pages.
+#
+# Requires Pages to be enabled for the repository with "Source: GitHub Actions"
+# (Settings -> Pages).
+#
+# Note on versions: tools/build-shinylive.R refuses to build unless dragulaR is
+# installed from r-universe, because that is how shinylive decides to vendor the
+# development WebAssembly build rather than the older CRAN one. r-universe
+# rebuilds a few hours after a push to master, so a run triggered immediately by
+# a merge can fail that check - re-run it from the Actions tab once r-universe
+# has caught up.
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::shinylive
+            any::shinydashboard
+
+      - name: Install dragulaR from r-universe
+        # The Repository field this writes into the installed DESCRIPTION is
+        # what points shinylive at the r-universe wasm binary.
+        run: |
+          install.packages(
+            "dragulaR",
+            repos = c("https://zzawadz.r-universe.dev", "https://cloud.r-project.org")
+          )
+        shell: Rscript {0}
+
+      - name: Build static site
+        run: Rscript tools/build-shinylive.R _shinylive
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _shinylive
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

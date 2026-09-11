@@ -32,3 +32,6 @@ vignettes/*.pdf
 *.utf8.md
 *.knit.md
 .Rproj.user
+
+# Shinylive static export (tools/build-shinylive.R)
+_shinylive/

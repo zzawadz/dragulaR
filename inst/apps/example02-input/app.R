@@ -1,4 +1,5 @@
 library(shiny)
+library(dragulaR)
 
 makeElement <- function(data, name)
 {
