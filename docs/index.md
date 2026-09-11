@@ -1,69 +1,80 @@
-# Drag'n'drop elements with *dragulaR*
+# Drag’n’drop elements with *dragulaR*
 
-[![Coverage Status](https://img.shields.io/codecov/c/github/zzawadz/dragulaR/master.svg)](https://codecov.io/github/zzawadz/dragulaR?branch=master)
+[![Coverage
+Status](https://img.shields.io/codecov/c/github/zzawadz/dragulaR/master.svg)](https://codecov.io/github/zzawadz/dragulaR?branch=master)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/dragulaR)](https://cran.r-project.org/package=dragulaR)
 [![Downloads](https://cranlogs.r-pkg.org/badges/dragulaR)](https://cran.rstudio.com/package=dragulaR)
-[![Total downloads](https://cranlogs.r-pkg.org/badges/grand-total/dragulaR)](https://cran.rstudio.com/web/packages/dragulaR/index.html)
+[![Total
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/dragulaR)](https://cran.rstudio.com/web/packages/dragulaR/index.html)
 
-R's interface for ***[dragula](https://github.com/bevacqua/dragula)*** library for moving around elements in shiny app.
+R’s interface for ***[dragula](https://github.com/bevacqua/dragula)***
+library for moving around elements in shiny app.
 
 ## Installation:
 
-```r
+``` r
 source("https://install-github.me/zzawadz/dragulaR")
 ```
 
 ## Live examples
 
 Every app in `inst/apps/` is also published as a static
-[Shinylive](https://posit-dev.github.io/r-shinylive/) build - it runs entirely in
-the browser via WebAssembly, with no Shiny server involved. Try them without
-installing anything at <https://zzawadz.github.io/dragulaR/>.
+[Shinylive](https://posit-dev.github.io/r-shinylive/) build - it runs
+entirely in the browser via WebAssembly, with no Shiny server involved.
+Try them without installing anything at
+<https://zzawadz.github.io/dragulaR/>.
 
 To build the site yourself:
 
-```r
+``` r
 # shinylive resolves the wasm binary from where dragulaR was installed,
 # so install it from r-universe to get the development build
 install.packages("dragulaR", repos = "https://zzawadz.r-universe.dev")
 install.packages(c("shinylive", "shinydashboard"))
 ```
 
-```sh
+``` sh
 Rscript tools/build-shinylive.R _shinylive
 Rscript -e 'httpuv::runStaticServer("_shinylive")'
 ```
 
-The output in `_shinylive/` is static files only, so it can be served from
-GitHub Pages or any static host.
+The output in `_shinylive/` is static files only, so it can be served
+from GitHub Pages or any static host.
 
 ## Demo:
 
-### Drag'n'drop plots:
+### Drag’n’drop plots:
 
-```r
+``` r
 library(dragulaR)
 runApp(system.file("apps/example01-dragula", package = "dragulaR"))
 ```
+
 ![Dragging plots between containers](media/basic.gif)
+
+Dragging plots between containers
 
 ### Track what is in the containers:
 
-```r
+``` r
 runApp(system.file("apps/example02-input", package = "dragulaR"))
 ```
 
 ![Tracking which elements are in each container](media/model.gif)
 
+Tracking which elements are in each container
+
 ### Works with `renderUI`
 
-```r
+``` r
 runApp(system.file("apps/example06-dragula-dynamic-elements-renderUI", package = "dragulaR"))
 ```
 
 ![Dragula working with renderUI](media/renderui.gif)
 
-```r
+Dragula working with renderUI
+
+``` r
 runApp(
   system.file("apps/example06-dragula-dynamic-elements-renderUI", package = "dragulaR"),
   display.mode = "showcase")
@@ -71,9 +82,11 @@ runApp(
 
 ### Pass options to `dragula`
 
-See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-options) for valid options.
+See [dragula
+README](https://github.com/bevacqua/dragula#dragulacontainers-options)
+for valid options.
 
-```r
+``` r
 runApp(
   system.file("apps/example07-input-options", package = "dragulaR"),
   display.mode = "showcase")
@@ -81,9 +94,10 @@ runApp(
 
 ### Limit maximum items in a container
 
-Use the `maxItems` option to restrict the number of items that can be dropped into a container:
+Use the `maxItems` option to restrict the number of items that can be
+dropped into a container:
 
-```r
+``` r
 # Limit "Model" container to 3 items maximum
 dragula(c("Available", "Model"), maxItems = list(Model = 3))
 
@@ -93,7 +107,7 @@ runApp(system.file("apps/example08-max-items", package = "dragulaR"))
 
 ### All examples
 
-```r
+``` r
 library(dragulaR)
 dir(system.file("apps/", package = "dragulaR"))
 # dashboard-example
