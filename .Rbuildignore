@@ -7,3 +7,6 @@ media
 docs
 README.md
 AGENTS.md
+^tools$
+^_shinylive$
+^\.github$

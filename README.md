@@ -13,6 +13,29 @@ R's interface for ***[dragula](https://github.com/bevacqua/dragula)*** library f
 source("https://install-github.me/zzawadz/dragulaR")
 ```
 
+## Live examples
+
+Every app in `inst/apps/` is also published as a static
+[Shinylive](https://posit-dev.github.io/r-shinylive/) build - it runs entirely in
+the browser via WebAssembly, with no Shiny server involved.
+
+To build the site yourself:
+
+```r
+# shinylive resolves the wasm binary from where dragulaR was installed,
+# so install it from r-universe to get the development build
+install.packages("dragulaR", repos = "https://zzawadz.r-universe.dev")
+install.packages(c("shinylive", "shinydashboard"))
+```
+
+```sh
+Rscript tools/build-shinylive.R _shinylive
+Rscript -e 'httpuv::runStaticServer("_shinylive")'
+```
+
+The output in `_shinylive/` is static files only, so it can be served from
+GitHub Pages or any static host.
+
 ## Demo:
 
 ### Drag'n'drop plots:
@@ -51,7 +74,7 @@ See [dragula README](https://github.com/bevacqua/dragula#dragulacontainers-optio
 
 ```r
 runApp(
-  system.file("apps/example07-dragula-input-options", package = "dragulaR"),
+  system.file("apps/example07-input-options", package = "dragulaR"),
   display.mode = "showcase")
 ```
 
@@ -79,6 +102,6 @@ dir(system.file("apps/", package = "dragulaR"))
 # example04-dragula-module
 # example05-dragula-dynamic-elements
 # example06-dragula-dynamic-elements-renderUI
-# example07-dragula-input-options
+# example07-input-options
 # example08-max-items
 ```
