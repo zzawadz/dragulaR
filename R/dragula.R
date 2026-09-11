@@ -10,9 +10,8 @@
 #'   \item \code{maxItems}: named list specifying maximum items per container, e.g. \code{maxItems = list(Model = 3)}
 #' }
 #'
-#' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget
+#' @importFrom htmlwidgets createWidget shinyWidgetOutput shinyRenderWidget JS
 #' @import shiny
-#' @importFrom V8 JS
 #' @export
 #' @return
 #' Return htmlWidget. Should be used only inside shiny ui.
